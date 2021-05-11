@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.7.2 on win32)" generated="20191012 13:47:57.341" rpa="false">
+<suite id="s1" name="Android" source="D:\自动化\Projects\Banma\Android">
+<suite id="s1-s1" name="SmokeTest" source="D:\自动化\Projects\Banma\Android\SmokeTest.robot">
+<test id="s1-s1-t1" name="测试">
+<kw name="clear data">
+<doc>清除专网数据》清除公网数据》清除redis缓存</doc>
+<arguments>
+<arg>${id_card}</arg>
+<arg>${phone}</arg>
+</arguments>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>delete from edl_private.user where id_card in ('${id_card}')</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.300" endtime="20191012 13:47:59.319"></status>
+</kw>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>delete from edl_private.vehicle_bind_his where vehicle_bind_id in (select id from edl_private.vehicle_bind where id_card in ('${id_card}'))</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.319" endtime="20191012 13:47:59.328"></status>
+</kw>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>delete from edl_private.vehicle_bind where id_card in ('${id_card}')</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.328" endtime="20191012 13:47:59.333"></status>
+</kw>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>delete from edl_private.drv_veh_bind_count where id_card in ('${id_card}')</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.333" endtime="20191012 13:47:59.338"></status>
+</kw>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>delete from edl_private.drv_veh_other_city_bind_count where user_id in (select id from edl_private.user where id_card in ('${id_card}'))</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.338" endtime="20191012 13:47:59.339"></status>
+</kw>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>delete from edl_public.user_face where user_id in (select id from edl_public.user where phone in ('${phone}'))</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.339" endtime="20191012 13:47:59.344"></status>
+</kw>
+<kw name="Execute Sql" library="MysqlRF">
+<arguments>
+<arg>update edl_public.user set name=NULL,id_card=NULL,city_id=NULL,bind_edl_flag=0,has_face_image_flag=0,sex=0 where phone='${phone}'</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.344" endtime="20191012 13:47:59.347"></status>
+</kw>
+<kw name="Query" library="MysqlRF">
+<arguments>
+<arg>select id,unq_key from edl_private.user where id_card='${id_card}'</arg>
+</arguments>
+<assign>
+<var>${pvt_user_info}</var>
+</assign>
+<msg timestamp="20191012 13:47:59.348" level="INFO">${pvt_user_info} = None</msg>
+<status status="PASS" starttime="20191012 13:47:59.347" endtime="20191012 13:47:59.348"></status>
+</kw>
+<kw name="Query" library="MysqlRF">
+<arguments>
+<arg>select id from edl_public.user where phone='${phone}'</arg>
+</arguments>
+<assign>
+<var>${pub_user_info}</var>
+</assign>
+<msg timestamp="20191012 13:47:59.349" level="INFO">${pub_user_info} = [[597156]]</msg>
+<status status="PASS" starttime="20191012 13:47:59.348" endtime="20191012 13:47:59.349"></status>
+</kw>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>bmc:c1:dl:idCard:${id_card}</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.349" endtime="20191012 13:47:59.351"></status>
+</kw>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>bmc:c1:user:idCard:${id_card}</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.351" endtime="20191012 13:47:59.352"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${pvt_user_info}</arg>
+<arg>delete redis value</arg>
+<arg>bmc:c1:user:uid:${pvt_user_info}[0][0]</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.352" endtime="20191012 13:47:59.352"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${pvt_user_info}</arg>
+<arg>delete redis value</arg>
+<arg>bmc:c1:user:unqKey:${pvt_user_info}[0][1]</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.352" endtime="20191012 13:47:59.352"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${pub_user_info}</arg>
+<arg>delete redis value</arg>
+<arg>bmc:c2:userById:a:${pub_user_info}[0][0]</arg>
+</arguments>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>bmc:c2:userById:a:${pub_user_info}[0][0]</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.352" endtime="20191012 13:47:59.353"></status>
+</kw>
+<status status="PASS" starttime="20191012 13:47:59.352" endtime="20191012 13:47:59.353"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${pub_user_info}</arg>
+<arg>delete redis value</arg>
+<arg>edl:pub:token:${pub_user_info}[0][0]:mobile</arg>
+</arguments>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>edl:pub:token:${pub_user_info}[0][0]:mobile</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.353" endtime="20191012 13:47:59.354"></status>
+</kw>
+<status status="PASS" starttime="20191012 13:47:59.353" endtime="20191012 13:47:59.354"></status>
+</kw>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>bmc:c2:userByPhone:a:${phone}</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.354" endtime="20191012 13:47:59.354"></status>
+</kw>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>bmc:c2:userByIdCard:a:${id_card}</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.354" endtime="20191012 13:47:59.355"></status>
+</kw>
+<kw name="Delete Redis Value" library="RedisRF">
+<arguments>
+<arg>edl:sms_total:${phone}</arg>
+</arguments>
+<status status="PASS" starttime="20191012 13:47:59.355" endtime="20191012 13:47:59.355"></status>
+</kw>
+<status status="PASS" starttime="20191012 13:47:59.299" endtime="20191012 13:47:59.355"></status>
+</kw>
+<status status="PASS" starttime="20191012 13:47:59.263" endtime="20191012 13:47:59.355" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20191012 13:47:57.382" endtime="20191012 13:47:59.356"></status>
+</suite>
+<status status="PASS" starttime="20191012 13:47:57.343" endtime="20191012 13:47:59.356"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Android">Android</stat>
+<stat pass="1" fail="0" id="s1-s1" name="SmokeTest">Android.SmokeTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

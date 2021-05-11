@@ -1,0 +1,61 @@
+{
+  "首页": {
+    "弹窗": {
+      "应急劵广告": "com.hikcreate.elecdrivlic:id/iv_close",
+      "引导页下一步按钮": "com.hikcreate.elecdrivlic:id/iv_home_guide_button",
+      "引导页跳过按钮": "com.hikcreate.elecdrivlic:id/iv_home_guide_button_skip"
+    },
+    "立即激活按钮":"com.hikcreate.elecdrivlic:id/tv_home_credit_btn",
+    "快捷上报按钮":"com.hikcreate.elecdrivlic:id/radio_main_scan",
+    "首页按钮": "com.hikcreate.elecdrivlic:id/radio_main_home",
+    "语音播报": "com.hikcreate.elecdrivlic:id/tv_home_horn",
+    "卡片区": {
+      "行驶证卡片": {
+        "车辆状态标志": "com.hikcreate.elecdrivlic:id/tv_home_my_vehicle_status"
+      }
+    },
+    "业务区": {
+      "我的车辆": {
+        "我的车辆入口按钮": "//descendant::*[@text='我的车辆'][2]",
+        "车辆列表": {
+          "车辆信息框": "com.hikcreate.elecdrivlic:id/clt_vehicle_info",
+          "添加车辆按钮": "com.hikcreate.elecdrivlic:id/tv_vehicle_add",
+          "没有车时的添加车辆按钮": "com.hikcreate.elecdrivlic:id/tv_error_page_action"
+        },
+        "添加车辆": {
+          "手动添加按钮": "com.hikcreate.elecdrivlic:id/lt_capture_bottom",
+          "车牌类型选择按钮": "com.hikcreate.elecdrivlic:id/tv_clicnese_bind_type",
+          "号牌号码输入框": "com.hikcreate.elecdrivlic:id/tv_clicnese_bind_plate_number",
+          "号牌号码输入矩形框1": "com.hikcreate.elecdrivlic:id/item_code_iv1",
+          "车主姓名输入框": "com.hikcreate.elecdrivlic:id/edt_clicnese_bind_name"
+        }
+      }
+    }
+  },
+  "我的": {
+    "我的按钮": "com.hikcreate.elecdrivlic:id/radio_main_me",
+    "设置按钮": "com.hikcreate.elecdrivlic:id/iv_me_setting"
+  },
+  "账号输入": {
+    "手机号码输入框":"//*[@resource-id='com.hikcreate.elecdrivlic:id/edt_login_phone']",
+    "下一步按钮":"com.hikcreate.elecdrivlic:id/btn_login"
+  },
+  "手势登陆": {
+    "字符密码登陆入口": "com.hikcreate.elecdrivlic:id/tv_keyboard_pwd_set_or_login"
+  },
+  "密码登录": {
+    "密码输入框":"com.hikcreate.elecdrivlic:id/edt_password",
+    "登录按钮":"com.hikcreate.elecdrivlic:id/btn_login"
+  },
+  "激活信用": {
+    "手动录入按钮": "com.hikcreate.elecdrivlic:id/tv_content",
+    "姓名输入框": "com.hikcreate.elecdrivlic:id/et_id_card_name",
+    "身份证号输入框": "com.hikcreate.elecdrivlic:id/et_id_card_card",
+    "身份验证下一步按钮": "com.hikcreate.elecdrivlic:id/btn_id_card_next",
+    "超时验证码认证按钮": "com.hikcreate.elecdrivlic:id/btn_pos",
+    "验证码输入框": "com.hikcreate.elecdrivlic:id/edt_captcha",
+    "验证码认证确认按钮": "com.hikcreate.elecdrivlic:id/btn_dlicense_phone_confirm",
+    "立即使用按钮": "com.hikcreate.elecdrivlic:id/btn_another_verify",
+    "授权按钮": "com.android.packageinstaller:id/permission_allow_button"
+  }
+}
